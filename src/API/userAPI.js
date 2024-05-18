@@ -1,9 +1,5 @@
-import axios from "axios";
+import baseAPI from "./index.js"
 
-const baseAPI = axios.create({
-    baseURL: "http://localhost:5000",
-    withCredentials: true,
-});
 
 
 export const getAllProducts = () => baseAPI.get("/shop");

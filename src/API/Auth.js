@@ -1,9 +1,5 @@
-import axios from "axios";
+import baseAPI from "./index.js"
 
-const baseAPI = axios.create({
-    baseURL: "http://localhost:5000",
-    withCredentials: true,   // for cookies
-});
 
 
 export const authUserSignin = (authData) => baseAPI.post("/user/auth/signin", authData);
