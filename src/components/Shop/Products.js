@@ -1,27 +1,35 @@
-import { useEffect, createContext, useContext } from "react"
-import { fetchAllProducts, allProductSelector } from "../../slices/user/allProducts"
+import { useEffect, createContext, useContext } from "react";
+import {
+  fetchAllProducts,
+  allProductSelector,
+} from "../../slices/user/allProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
 
 const Products = () => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   var { data, loading, hasError, filterData } = useSelector(allProductSelector);
-  data = filterData
+  data = filterData;
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
-
   const renderProducts = () => {
-
-    if (loading) return  <div class="grid place-items-center h-screen"> <PacmanLoader color="#36d7b7" /> </div>
-    if (hasError) return <h1>oops!! some thing went wrong. please try afteer some times.</h1>
-    if (!loading && data.length == 0) return <h1>No product avabile.</h1>
-
+    if (loading)
+      return (
+        <div class="grid place-items-center h-screen">
+          {" "}
+          <PacmanLoader color="#36d7b7" />{" "}
+        </div>
+      );
+    if (hasError)
+      return (
+        <h1>oops!! some thing went wrong. please try afteer some times.</h1>
+      );
+    if (!loading && data.length == 0) return <h1>No product avabile.</h1>;
 
     return (
       <>
@@ -39,9 +47,16 @@ const Products = () => {
                       className="h-full w-full object-cover object-center group-hover:opacity-75"
                     />
                   </div>
-                  <Link key={product._id} to={`/shop/product-details/${product._id}`} >
-                    <h3 className="mt-4 text-sm text-gray-700">{product.name} | {product.weight}</h3>
-                    <p className="mt-1 text-lg font-medium text-gray-900">{product.price} Rs.</p>
+                  <Link
+                    key={product._id}
+                    to={`/shop/product-details/${product._id}`}
+                  >
+                    <h3 className="mt-4 text-sm text-gray-700">
+                      {product.name} | {product.weight}
+                    </h3>
+                    <p className="mt-1 text-lg font-medium text-gray-900">
+                      {product.price} Rs.
+                    </p>
                   </Link>
                 </div>
               ))}
@@ -49,16 +64,10 @@ const Products = () => {
           </div>
         </div>
       </>
-    )
-  }
+    );
+  };
 
-
-  return (
-    <section>
-      {renderProducts()}
-    </section>
-  )
-}
-
+  return <section>{renderProducts()}</section>;
+};
 
 export default Products;

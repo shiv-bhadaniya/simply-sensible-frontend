@@ -20,4 +20,4 @@ const ProtectedRoutes = ({
   return children ? children : <Outlet />;
 };
 
-export default ProtectedRoutes
+export default ProtectedRoutes;
