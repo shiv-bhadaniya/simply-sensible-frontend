@@ -94,17 +94,6 @@ const ProductDetailsPage = () => {
     }
   };
 
-  var handleUpdateCart = (e) => {
-    let products = [];
-    if (localStorage.getItem("products")) {
-      products = JSON.parse(localStorage.getItem("products"));
-      products = products.filter((item) => item._id !== productId);
-    }
-    products.push(currentProductDetails);
-    localStorage.setItem("products", JSON.stringify(products));
-    dispatch(AddToCart(currentProductDetails));
-  };
-
   var handleQuantityChange = (e) => {
     let qu = +e.target.value;
     setQuantity(qu);
@@ -246,17 +235,6 @@ const ProductDetailsPage = () => {
                   <span class="title-font font-medium text-2xl text-gray-900">
                     &#8377; {productDetails.price}{" "}
                   </span>
-                  {isAdded && (
-                    <>
-                      <button
-                        onClick={handleUpdateCart}
-                        class="flex ml-auto text-white bg-[#CE9461] border-0 py-2 px-6 focus:outline-none hover:bg-[#DEA057] rounded"
-                      >
-                        {" "}
-                        Update Cart Details{" "}
-                      </button>
-                    </>
-                  )}
                   <button
                     onClick={isAdded ? handleRemoveFromCart : handleAddToCart}
                     class={`flex ml-auto text-white border-0 py-2 px-6 focus:outline-none rounded ${isAdded ? " bg-red-600 hover:bg-red-700" : "bg-[#CE9461] hover:bg-[#DEA057]"} `}
