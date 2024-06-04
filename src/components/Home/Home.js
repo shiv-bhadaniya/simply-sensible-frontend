@@ -5,6 +5,7 @@ import Hero1 from "./Hero1";
 import Hero2 from "./Hero2";
 import Hero3 from "./Hero3";
 import Hero4 from "./Hero4";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Home = () => {
       <Hero2 />
       <Hero3 />
       <Hero4 />
+      <Footer />
     </div>
   );
 };

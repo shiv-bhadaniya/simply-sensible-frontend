@@ -1,27 +1,29 @@
-import React from "react";
-
-const Footer = () => {
+export default function Footer() {
   return (
-    <>
-      <footer class="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
-        <span class=" text-lg  text-gray-500 sm:text-center dark:text-gray-400">
-          © 2022 Shiv Bhadaniya All Rights Reserved.
-        </span>
-        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-          <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6 ">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="mailto:shivbhadaniya56@gmail.com" class="hover:underline">
-              Contact
-            </a>
-          </li>
-        </ul>
-      </footer>
-    </>
+    <footer className=" px-8 flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
+      <p color="blue-gray" className="font-normal">
+        &copy; {new Date().getFullYear()} Simply Sensible
+      </p>
+      <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
+        <li>
+          <p
+            href="#"
+            color="blue-gray"
+            className="font-normal transition-colors hover:cursor-pointer hover:text-blue-500 focus:text-blue-500"
+          >
+            About Us
+          </p>
+        </li>
+        <li>
+          <a
+            href="mailto:shivbhadaniya56@gmail.com"
+            color="blue-gray"
+            className="font-normal transition-colors hover:cursor-pointer hover:text-blue-500 focus:text-blue-500"
+          >
+            <p>Contact Us</p>
+          </a>
+        </li>
+      </ul>
+    </footer>
   );
-};
-
-export default Footer;
+}
