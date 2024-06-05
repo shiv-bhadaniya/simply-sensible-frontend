@@ -25,11 +25,11 @@ export const AuthSlice = createSlice({
       state.hasError = false;
       state.data = payload;
     },
-    authUserFailure: (state, { msg }) => {
-      console.log(" Authentication failure. ", msg);
+    authUserFailure: (state, { payload }) => {
+      console.log(" Authentication failure. ", payload);
       state.loading = false;
       state.hasError = true;
-      toast.error("Something went wrong.", {
+      toast.error(payload, {
         position: "bottom-center",
       });
     },
@@ -54,6 +54,11 @@ export const authUserSignin = (data, navigate) => {
     try {
       response = await API.authUserSignin(data);
       console.log("response from try: ", response);
+
+      if (response.status !== 200) {
+        throw Error(response?.data?.message);
+      }
+
       if (!response.data.token) {
         throw Error;
       }
@@ -66,7 +71,7 @@ export const authUserSignin = (data, navigate) => {
       dispatch(setStripAPIKeyFun(stripeKey.data.stripeApiKey));
       navigate("/");
     } catch (error) {
-      dispatch(authUserFailure(response));
+      dispatch(authUserFailure(error?.response?.data?.message));
     }
   };
 };
@@ -78,6 +83,11 @@ export const authUserSignup = (data, navigate) => {
     try {
       const response = await API.authUserSignup(data);
       console.log("response from try : ", response);
+
+      if (response.status !== 200) {
+        throw Error(response?.data?.message);
+      }
+
       if (!response.data.token) {
         throw Error;
       }
@@ -86,7 +96,7 @@ export const authUserSignup = (data, navigate) => {
       dispatch(setStripAPIKeyFun(stripeKey.data.stripeApiKey));
       navigate("/");
     } catch (error) {
-      dispatch(authUserFailure());
+      dispatch(authUserFailure(error?.response?.data?.message));
     }
   };
 };
