@@ -21,20 +21,16 @@ import OrderList from "./components/Admid/OrderList";
 import UsersList from "./components/Admid/UsersList";
 import NotFound from "./components/NotFound/NotFound";
 
-const CheckOut = lazy(() => import("./components/CheckOut/CheckOut"));
-const Home = lazy(() => import("./components/Home/Home"));
-const Shop = lazy(() => import("./components/Shop/Shop"));
-const Cart = lazy(() => import("./components/Cart/Cart"));
-const Auth = lazy(() => import("../src/components/Auth/Auth.js"));
-const AdminAddProduct = lazy(
-  () => import("./components/Admid/AdminAddProduct"),
-);
-const ProductDetailsPage = lazy(
-  () => import("./components/Product-Details-Page/ProductDetailsPage"),
-);
-const Payment = lazy(() => import("./components/Payment/Payment"));
-const Order = lazy(() => import("./components/User/Order"));
-const Profile = lazy(() => import("./components/User/Profile"));
+import CheckOut from "./components/CheckOut/CheckOut";
+import Home from "./components/Home/Home";
+import Shop from "./components/Shop/Shop";
+import Cart from "./components/Cart/Cart";
+import Auth from "../src/components/Auth/Auth.js";
+import AdminAddProduct from "./components/Admid/AdminAddProduct";
+import ProductDetailsPage from "./components/Product-Details-Page/ProductDetailsPage";
+import Payment from "./components/Payment/Payment";
+import Order from "./components/User/Order";
+import Profile from "./components/User/Profile";
 
 const App = () => {
   const dispatch = useDispatch();
