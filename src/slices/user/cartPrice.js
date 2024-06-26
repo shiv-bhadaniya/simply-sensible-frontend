@@ -21,8 +21,8 @@ export const cartPriceCalulaterFromServerSlice = createSlice({
       state.errorCalculateingPriceFromServer = false;
       state.cartPriceWithFinalAmountFromServer = payload;
     },
-    cartPriceCalulateFromServerFailure: (state) => {
-      toast.error("Something went wrong", {
+    cartPriceCalulateFromServerFailure: (state, { payload }) => {
+      toast.error(payload, {
         position: "bottom-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -45,13 +45,19 @@ export const calculateCartFinalPriceFromServer = (cartDetails, navigate) => {
 
     try {
       const finalPrice = await getCartPrice(cartDetails);
+
+      console.log("Final PRice from calulating final price : ", finalPrice);
+      if (finalPrice && typeof finalPrice !== Number) {
+        throw new Error(finalPrice?.data);
+      }
       if (finalPrice == 0) {
         throw Error;
       }
       dispatch(cartPriceCalulateFromServerSucccess(finalPrice.data));
       navigate("/shop/checkout");
     } catch (error) {
-      dispatch(cartPriceCalulateFromServerFailure());
+      console.error("Error while calculating price : ", error);
+      dispatch(cartPriceCalulateFromServerFailure(error?.message));
       navigate("/shop");
     }
   };
