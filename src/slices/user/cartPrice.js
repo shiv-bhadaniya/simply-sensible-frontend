@@ -46,9 +46,8 @@ export const calculateCartFinalPriceFromServer = (cartDetails, navigate) => {
     try {
       const finalPrice = await getCartPrice(cartDetails);
 
-      console.log("Final PRice from calulating final price : ", finalPrice);
-      if (finalPrice && typeof finalPrice !== Number) {
-        throw new Error(finalPrice?.data);
+      if (finalPrice?.status !== 200) {
+        throw new Error(finalPrice?.response?.data);
       }
       if (finalPrice == 0) {
         throw Error;
@@ -56,8 +55,11 @@ export const calculateCartFinalPriceFromServer = (cartDetails, navigate) => {
       dispatch(cartPriceCalulateFromServerSucccess(finalPrice.data));
       navigate("/shop/checkout");
     } catch (error) {
-      console.error("Error while calculating price : ", error);
-      dispatch(cartPriceCalulateFromServerFailure(error?.message));
+      dispatch(
+        cartPriceCalulateFromServerFailure(
+          error?.response?.data || "Something went wrong!!",
+        ),
+      );
       navigate("/shop");
     }
   };
