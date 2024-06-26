@@ -25,7 +25,10 @@ const Payment = () => {
     (state) => state.cartPriceFromServer,
   );
   console.log(cartPriceWithFinalAmountFromServer);
-  if (typeof cartPriceWithFinalAmountFromServer !== "number") {
+  if (
+    cartPriceWithFinalAmountFromServer &&
+    typeof cartPriceWithFinalAmountFromServer !== "number"
+  ) {
     navigate("/shop");
   }
 
