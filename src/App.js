@@ -44,134 +44,137 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Suspense fallback={<PageLoading />}>
         <BrowserRouter>
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route
-              path="/shop/product-details/:productId"
-              element={<ProductDetailsPage />}
-            />
-            <Route path="/shop/cart" element={<Cart />} />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route
+                path="/shop/product-details/:productId"
+                element={<ProductDetailsPage />}
+              />
+              <Route path="/shop/cart" element={<Cart />} />
 
-            <Route
-              path="/shop/checkout"
-              element={
-                <ProtectedRoutes isAuthenticated={isAuthenticated}>
-                  <CheckOut />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="/shop/checkout"
+                element={
+                  <ProtectedRoutes isAuthenticated={isAuthenticated}>
+                    <CheckOut />
+                  </ProtectedRoutes>
+                }
+              />
 
-            <Route
-              path="/shop/checkout/payment"
-              element={
-                stripAPIKey && (
-                  <Elements stripe={loadStripe(stripAPIKey)}>
-                    <ProtectedRoutes isAuthenticated={isAuthenticated}>
-                      <Payment />
-                    </ProtectedRoutes>
-                  </Elements>
-                )
-              }
-            />
+              <Route
+                path="/shop/checkout/payment"
+                element={
+                  stripAPIKey && (
+                    <Elements stripe={loadStripe(stripAPIKey)}>
+                      <ProtectedRoutes isAuthenticated={isAuthenticated}>
+                        <Payment />
+                      </ProtectedRoutes>
+                    </Elements>
+                  )
+                }
+              />
 
-            <Route
-              path="/user/profile"
-              element={
-                <ProtectedRoutes isAuthenticated={isAuthenticated}>
-                  <Profile />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="/user/profile"
+                element={
+                  <ProtectedRoutes isAuthenticated={isAuthenticated}>
+                    <Profile />
+                  </ProtectedRoutes>
+                }
+              />
 
-            <Route
-              path="/user/profile/order"
-              element={
-                <ProtectedRoutes isAuthenticated={isAuthenticated}>
-                  <Order />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="/user/profile/order"
+                element={
+                  <ProtectedRoutes isAuthenticated={isAuthenticated}>
+                    <Order />
+                  </ProtectedRoutes>
+                }
+              />
 
-            {/* Admin route */}
+              {/* Admin route */}
 
-            <Route
-              path="/admin/create/product"
-              element={
-                <ProtectedRoutes
-                  isAuthenticated={isAuthenticated}
-                  isAdmin={isAdmin}
-                  adminRoute={true}
-                >
-                  <AdminAddProduct />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="/admin/create/product"
+                element={
+                  <ProtectedRoutes
+                    isAuthenticated={isAuthenticated}
+                    isAdmin={isAdmin}
+                    adminRoute={true}
+                  >
+                    <AdminAddProduct />
+                  </ProtectedRoutes>
+                }
+              />
 
-            <Route
-              path="/admin/dashboard"
-              element={
-                <ProtectedRoutes
-                  isAuthenticated={isAuthenticated}
-                  isAdmin={isAdmin}
-                  adminRoute={true}
-                >
-                  <Dashboard />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <ProtectedRoutes
+                    isAuthenticated={isAuthenticated}
+                    isAdmin={isAdmin}
+                    adminRoute={true}
+                  >
+                    <Dashboard />
+                  </ProtectedRoutes>
+                }
+              />
 
-            <Route
-              path="admin/products"
-              element={
-                <ProtectedRoutes
-                  isAuthenticated={isAuthenticated}
-                  isAdmin={isAdmin}
-                  adminRoute={true}
-                >
-                  <ProductList />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="admin/products"
+                element={
+                  <ProtectedRoutes
+                    isAuthenticated={isAuthenticated}
+                    isAdmin={isAdmin}
+                    adminRoute={true}
+                  >
+                    <ProductList />
+                  </ProtectedRoutes>
+                }
+              />
 
-            <Route
-              path="admin/orders"
-              element={
-                <ProtectedRoutes
-                  isAuthenticated={isAuthenticated}
-                  isAdmin={isAdmin}
-                  adminRoute={true}
-                >
-                  <OrderList />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="admin/orders"
+                element={
+                  <ProtectedRoutes
+                    isAuthenticated={isAuthenticated}
+                    isAdmin={isAdmin}
+                    adminRoute={true}
+                  >
+                    <OrderList />
+                  </ProtectedRoutes>
+                }
+              />
 
-            <Route
-              path="admin/users"
-              element={
-                <ProtectedRoutes
-                  isAuthenticated={isAuthenticated}
-                  isAdmin={isAdmin}
-                  adminRoute={true}
-                >
-                  <UsersList />
-                </ProtectedRoutes>
-              }
-            />
+              <Route
+                path="admin/users"
+                element={
+                  <ProtectedRoutes
+                    isAuthenticated={isAuthenticated}
+                    isAdmin={isAdmin}
+                    adminRoute={true}
+                  >
+                    <UsersList />
+                  </ProtectedRoutes>
+                }
+              />
 
-            {/* not found page */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              {/* not found page */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
         </BrowserRouter>
       </Suspense>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 
